@@ -1,0 +1,59 @@
+<div class="container main-containe">
+    <h1>Cadastro</h1>
+
+    <form novalidate (ngSubmit)="adicionarConta()" [formGroup]="cadastroForm">
+
+        <h4>Crie sua Conta</h4>
+        <hr>
+
+        <div class="alert alert-danger" *ngIf="errors.length > 0">
+            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+                <li *nfFor="let error of errors">{{ error }}</li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md2 control-label">E-mail</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="email" placeholder="E-mail (requerido)"
+                    formControlName="email" [ngClass]="{'is-invalid': displayMessage.email}">
+                <span class="text-danger" *ngIf="displayMessage.email">
+                    <p [innerHTML]="displayMessage.email"></p>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Confirme a Senha</label>
+            <div class="col-md-10">
+                <input type="password" class="form-control" id="password" placeholder="Senha (requerido)"
+                    formControlName="password" [ngClass]="{'is-invalid': displayMessage.password}">
+                <span class="text-danger" *ngIf="displayMessage.password">
+                    <p [innerHTML]="displayMessage.password"></p>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Confirme a Senha</label>
+            <div class="col-md-10">
+                <input type="password" class="form-control" id="confirmPassword"
+                    placeholder="Confirme a senha (requerido)" formControlName="confirmPassword"
+                    [ngClass]="{'is-invalid': displayMessage.confirmPassword}">
+                <span class="text-danger" *ngIf="displayMessage.confirmPassword">
+                    <p [innerHTML]="displayMessage.confirmPassword"></p>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+                <span>
+                    <button class="btn btn-success" id="Resgistrar" [disabled]="!cadastroForm.valid"
+                        type="submit">Resgistrar</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
