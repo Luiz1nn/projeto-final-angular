@@ -81,10 +81,10 @@ export class CadastroComponent implements OnInit, AfterViewInit {
       this.usuario = Object.assign({}, this.usuario, this.cadastroForm.value);
 
       this.contaService.registrarUsuario(this.usuario)
-      // .subscribe(
-      //   sucesso => {this.processarSucesso(sucesso)},
-      //   falha => {this.processarFalha(falha)}
-      // ); 
+      .subscribe(
+        sucesso => {this.processarSucesso(sucesso)},
+        falha => {this.processarFalha(falha)}
+      ); 
 
       this.mudancasNaoSalvas = false;
     }
@@ -100,7 +100,7 @@ export class CadastroComponent implements OnInit, AfterViewInit {
 
     if (toast) {
       toast.onHidden.subscribe(() => {
-        // this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       });
     }
   }

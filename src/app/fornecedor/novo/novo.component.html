@@ -5,7 +5,7 @@
     <hr>
     <div class="row">
         <div class="col-md-10">
-            <form novalidate="novalidate" (ngSubmit)="adicionarFornecedor()" [formGroup]="fornecedorForm()">
+            <form novalidate="novalidate" (ngSubmit)="adicionarFornecedor()" [formGroup]="fornecedorForm">
 
                 <div class="alert alert-danger" *ngIf="errors.length > 0">
                     <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
@@ -28,8 +28,10 @@
                 <div class="form-group">
                     <label class="control-label">Documento</label>
                     <div>
-                        <input type="text" class="form-control" id="documento" placeholder="(requerido)"
-                            formControlName="documento" [ngClass]="{ 'is-invalid': displayMessage.documento}">
+                        <input type="text" class="form-control" id="documento" placeholder="{{ textoDocumento }}"
+                            formControlName="documento"
+                            [textMask]="tipoFornecedorForm().value === '1' ? { mask: MASKS.cpf.textMask } : { mask: MASKS.cnpj.textMask }"
+                            [ngClass]="{ 'is-invalid': displayMessage.documento}">
 
                         <span class="text-danger" *ngIf="displayMessage.documento">
                             <p [innerHTML]="displayMessage.documento"></p>
@@ -38,25 +40,28 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="TipoFornecedor" class="control-label">Tipo</label><br>
-                    <input type="radio" value="1" id="tipoFornecedor" formControlName="tipoFornecedor">
-                    <input type="radio" value="2" id="tipoFornecedor" formControlName="tipoFornecedor">
+                    <label class="control-label">Tipo</label><br>
+                    <input type="radio" value="1" id="tipoFornecedor" formControlName="tipoFornecedor"
+                        name="tipoFornecedor"> Pessoa Física<br>
+                    <input type="radio" value="2" id="tipoFornecedor" formControlName="tipoFornecedor"
+                        name="tipoFornecedor"> Pessoa Jurídica
                 </div>
 
                 <div class="form-group">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="ativo" formControlName="">
+                        <input type="checkbox" class="form-check-input" id="ativo" formControlName="ativo" name="ativo"
+                            value="true"> Ativo?
                     </label>
                 </div>
 
                 <h4>Endereço</h4>
                 <hr>
-                <div>
+                <div formGroupName="endereco">
                     <div class="form-group">
                         <label class="control-label">CEP</label>
                         <div>
                             <input type="text" class="form-control" id="cep" placeholder="CEP (requerido)"
-                                formControlName="cep" [ngClass]="{ 'is-invalid': displayMessage.cep }">
+                                formControlName="cep" cep [textMask]="{ mask: MASKS.cep.textMask }" [ngClass]="{ 'is-invalid': displayMessage.cep }">
                             <span class="text-danger" *ngIf="displayMessage.cep">
                                 <p [innerHTML]="displayMessage.cep"></p>
                             </span>
@@ -85,9 +90,8 @@
                     <div class="form-group">
                         <label class="control-label">Complemento</label>
                         <div>
-                            <input type="text" class="form-control" id="complemento"
-                                placeholder="Complemento (requerido)" formControlName="complemento"
-                                [ngClass]="{ 'is-invalid': displayMessage.complemento }">
+                            <input type="text" class="form-control" id="complemento" placeholder="Complemento"
+                                formControlName="complemento" [ngClass]="{ 'is-invalid': displayMessage.complemento }">
                             <span class="text-danger" *ngIf="displayMessage.complemento">
                                 <p [innerHTML]="displayMessage.complemento"></p>
                             </span>
@@ -109,7 +113,7 @@
                             <input type="text" class="form-control" id="cidade" placeholder="Cidade (requerido)"
                                 formControlName="cidade" [ngClass]="{ 'is-invalid': displayMessage.cidade }">
                             <span class="text-danger" *ngIf="displayMessage.cidade">
-                                <p [innerHTMl]="displayMessage.cidade"></p>
+                                <p [innerHTML]="displayMessage.cidade"></p>
                             </span>
                         </div>
                     </div>
@@ -155,14 +159,14 @@
 
                 <div class="form-group">
                     <input type="text" value="Cadastrar" class="btn btn-primary">&nbsp;
-                    a,<button class="btn-info" [routerLink]="['/fornecedores/listar-todos']">Voltar</button>
+                    <button class="btn btn-info" [routerLink]="['/fornecedores/listar-todos']">Voltar</button>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-2">
                         <p>Formulario valido: {{ fornecedorForm.valid }}</p>
                         <p>Formulario Tocado: {{ fornecedorForm.touched }}</p>
-                        <p>Formulario Sujo: {{ fornecedorFomr.dirty }}</p>
+                        <p>Formulario Sujo: {{ fornecedorForm.dirty }}</p>
                         <p>Formulario: {{ formResult }}</p>
                     </div>
                 </div>

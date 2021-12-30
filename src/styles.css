@@ -4,7 +4,17 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-/* footer styles
+.main-container {
+    padding-top: 25px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+}
+
+/* Sticky footer styles
  -------------------------- */
 
 html {
@@ -34,7 +44,7 @@ button.accept-policy {
     line-height: inherit;
 }
 
-/* footer styles
+/* Sticky footer styles
  ------------------------------ */
 
 hmtl {

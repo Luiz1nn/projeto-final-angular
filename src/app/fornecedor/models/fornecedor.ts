@@ -7,4 +7,5 @@ export class Fornecedor {
     ativo: boolean;
     tipoFornecedor: number;
     endereco: Endereco;
+    // produtos: Produto[]
 }
