@@ -80,7 +80,10 @@ export class EditarComponent extends FormBaseComponent implements OnInit {
     this.tipoFornecedor = this.fornecedor.tipoFornecedor;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+    this.spinner.show();
+
     this.fornecedorForm = this.fb.group({
       id: '',
       nome: ['', [Validators.required]],
@@ -197,7 +200,7 @@ export class EditarComponent extends FormBaseComponent implements OnInit {
 
       this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString());
 
-      this.fornecedorService.autualizarFornecedor(this.fornecedor)
+      this.fornecedorService.atualizarFornecedor(this.fornecedor)
         .subscribe(
           sucesso => { this.processarSucesso(sucesso) },
           falha => { this.processarFalha(falha) }

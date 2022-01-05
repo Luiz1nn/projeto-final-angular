@@ -37,7 +37,7 @@ export class FornecedorService extends BaseService {
         catchError(super.serviceError));
   }
 
-  autualizarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
+  atualizarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
     return this.http
       .put(this.UrlServiceV1 + "fornecedores/" + fornecedor.id, fornecedor, super.ObterAuthHeaderJson())
       .pipe(

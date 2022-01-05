@@ -32,7 +32,7 @@ export class ExcluirComponent {
     excluirEvento() {
       this.forncedorService.excluirFornecedor(this.fornecedor.id)
         .subscribe(
-          evento => { this.sucessoExclusao(evento) },
+          fornecedor => { this.sucessoExclusao(fornecedor) },
           error => { this.falha(error) }
         );
     }
